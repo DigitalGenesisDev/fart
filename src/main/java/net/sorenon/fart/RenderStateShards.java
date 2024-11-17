@@ -4,10 +4,9 @@ import java.util.OptionalDouble;
 import java.util.function.Supplier;
 
 import net.minecraft.client.render.RenderPhase;
-import net.minecraft.client.render.Shader;
 import net.minecraft.util.Identifier;
 
-public class RenderStateShards {
+public class RenderStateShards extends RenderPhase {
     public static final RenderPhase.Transparency NO_TRANSPARENCY = RenderPhase.NO_TRANSPARENCY;
     public static final RenderPhase.Transparency ADDITIVE_TRANSPARENCY = RenderPhase.ADDITIVE_TRANSPARENCY;
     public static final RenderPhase.Transparency LIGHTNING_TRANSPARENCY = RenderPhase.LIGHTNING_TRANSPARENCY;
@@ -49,12 +48,16 @@ public class RenderStateShards {
     //Custom
     public static final RenderPhase.LineWidth AUTO_LINE = new RenderPhase.LineWidth(OptionalDouble.empty());
 
+    public RenderStateShards(String name, Runnable beginAction, Runnable endAction) {
+        super(name, beginAction, endAction);
+    }
+
     public static RenderPhase.DepthTest depthTest(String name, int depthFunction) {
         return new RenderPhase.DepthTest(name, depthFunction);
     }
 
-    public static RenderPhase.Shader shader(Supplier<Shader> supplier) {
-        return new RenderPhase.Shader(supplier);
+    public static RenderPhase.ShaderProgram shaderProgram(Supplier<net.minecraft.client.gl.ShaderProgram> supplier) {
+        return new RenderPhase.ShaderProgram(supplier);
     }
 
     public static RenderPhase.Texture texture(Identifier resourceLocation, boolean blur, boolean mipmap) {

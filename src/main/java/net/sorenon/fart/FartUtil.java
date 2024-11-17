@@ -4,8 +4,8 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.Matrix3f;
-import net.minecraft.util.math.Matrix4f;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -62,7 +62,7 @@ public class FartUtil {
 
         RenderTypeBuilder builder = new RenderTypeBuilder(new Identifier("fart", "line"), VertexFormats.LINES, VertexFormat.DrawMode.LINES, 16, false, false);
         builder.innerBuilder
-                .shader(RenderStateShards.shader(GameRenderer::getRenderTypeLinesShader))
+                .program(RenderStateShards.shaderProgram(GameRenderer::getRenderTypeLinesProgram))
                 .lineWidth(RenderStateShards.lineWidth(lineWidth))
                 .layering(RenderStateShards.VIEW_OFFSET_Z_LAYERING)
                 .transparency(RenderStateShards.TRANSLUCENT_TRANSPARENCY)
@@ -80,7 +80,7 @@ public class FartUtil {
 
         RenderTypeBuilder builder = new RenderTypeBuilder(new Identifier("fart", "line_color_only"), VertexFormats.LINES, VertexFormat.DrawMode.LINES, 16, false, false);
         builder.innerBuilder
-                .shader(RenderStateShards.shader(GameRenderer::getRenderTypeLinesShader))
+                .program(RenderStateShards.shaderProgram(GameRenderer::getRenderTypeLinesProgram))
                 .lineWidth(RenderStateShards.lineWidth(lineWidth))
                 .layering(RenderStateShards.VIEW_OFFSET_Z_LAYERING)
                 .transparency(RenderStateShards.TRANSLUCENT_TRANSPARENCY)
